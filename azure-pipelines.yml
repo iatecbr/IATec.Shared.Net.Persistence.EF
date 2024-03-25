@@ -25,16 +25,15 @@ steps:
     
   - task: NuGetAuthenticate@0
     displayName: 'NuGet authenticate'
-    
-  - task: RenameFiles@1
+      
+  - task: PowerShell@2
     displayName: 'Rename NuGet.Config.Prod To NuGet.Config'
     inputs:
-      SourceFolder: '$(Build.SourcesDirectory)'
-      Contents: 'NuGet.Config.Prod'
-      TargetFolder: '$(Build.SourcesDirectory)'
-      RenameTo: 'NuGet.Config'
+      targetType: 'inline'
+      script: |
+        Rename-Item -Path "$(Build.SourcesDirectory)\NuGet.Config.Prod" -NewName "NuGet.Config"
 
-  - task: qetza.replacetokens.replacetokens-task.replacetokens@3
+  - task: replacetokens@6
     displayName: 'Replace variables in NuGet.Config'
     inputs:
       targetFiles: '**/NuGet.Config'
