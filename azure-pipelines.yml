@@ -26,24 +26,24 @@ steps:
   - task: NuGetAuthenticate@0
     displayName: 'NuGet authenticate'
     
-#  - task: RenameFiles@1
-#    displayName: 'Rename NuGet.Config.Prod To NuGet.Config'
-#    inputs:
-#      SourceFolder: '$(Build.SourcesDirectory)'
-#      Contents: 'NuGet.Config.Prod'
-#      TargetFolder: '$(Build.SourcesDirectory)'
-#      RenameTo: 'NuGet.Config'
-#
-#  - task: qetza.replacetokens.replacetokens-task.replacetokens@3
-#    displayName: 'Replace variables in NuGet.Config'
-#    inputs:
-#      targetFiles: '**/NuGet.Config'
-#      encoding: 'auto'
-#      writeBOM: true
-#      actionOnMissing: 'warn'
-#      keepToken: false
-#      tokenPrefix: '#{'
-#      tokenSuffix: '}#'
+  - task: RenameFiles@1
+    displayName: 'Rename NuGet.Config.Prod To NuGet.Config'
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)'
+      Contents: 'NuGet.Config.Prod'
+      TargetFolder: '$(Build.SourcesDirectory)'
+      RenameTo: 'NuGet.Config'
+
+  - task: qetza.replacetokens.replacetokens-task.replacetokens@3
+    displayName: 'Replace variables in NuGet.Config'
+    inputs:
+      targetFiles: '**/NuGet.Config'
+      encoding: 'auto'
+      writeBOM: true
+      actionOnMissing: 'warn'
+      keepToken: false
+      tokenPrefix: '#{'
+      tokenSuffix: '}#'
     
   - script: dotnet build --configuration $(buildConfiguration)
     displayName: 'Dotnet build'
