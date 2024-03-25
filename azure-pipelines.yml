@@ -30,7 +30,7 @@ steps:
     inputs:
       displayName: 'Pack nuGet package'
       command: pack
-      packagesToPack: '**/IATec.Shared.EF.Repository.csproj'
+      packagesToPack: '**/IATec.Shared.EF.Persistence.csproj'
       packDestination: '$(Build.ArtifactStagingDirectory)'
       versioningScheme: byEnvVar
       versionEnvVar: packageVersion

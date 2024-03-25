@@ -2,12 +2,12 @@ using IATec.Shared.Domain.Contracts.Entities;
 using IATec.Shared.Domain.Contracts.Repositories.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace IATec.Shared.EF.Repository.Generic;
+namespace IATec.Shared.EF.Repository.Repositories.Generic;
 
-public class ReadRepository<T>(DbContext dbContext) : IReadRepository<T>
+public class ReadRepository<T>(DbContext dbReadContext) : IReadRepository<T>
     where T : class, IEntity
 {
-    private readonly DbSet<T> _dbSet = dbContext.Set<T>();
+    private readonly DbSet<T> _dbSet = dbReadContext.Set<T>();
 
     public async Task<List<T>> GetAllAsync()
     {

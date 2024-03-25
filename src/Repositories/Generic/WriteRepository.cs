@@ -4,16 +4,16 @@ using IATec.Shared.Domain.Contracts.Repositories.Generic;
 using IATec.Shared.Domain.Identifies.Logging;
 using Microsoft.EntityFrameworkCore;
 
-namespace IATec.Shared.EF.Repository.Generic;
+namespace IATec.Shared.EF.Repository.Repositories.Generic;
 
 public class WriteRepository<T>(
-    DbContext dbContext,
+    DbContext dbWriteContext,
     ILogDispatcher logDispatcher)
-    : ReadRepository<T>(dbContext), IWriteRepository<T>
+    : ReadRepository<T>(dbWriteContext), IWriteRepository<T>
     where T : class, IEntity
 {
-    private readonly DbSet<T> _dbSet = dbContext.Set<T>();
-    private readonly DbContext _dbContext = dbContext;
+    private readonly DbSet<T> _dbSet = dbWriteContext.Set<T>();
+    private readonly DbContext _dbContext = dbWriteContext;
 
     protected async Task SaveLogAsync(dynamic entity, LogActionType action)
     {

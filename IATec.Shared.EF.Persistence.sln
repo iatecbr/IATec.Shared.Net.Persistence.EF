@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IATec.Shared.EF.Repository", "src/IATec.Shared.EF.Repository.csproj", "{6C8DD48F-9B0C-4FFC-B2BD-FFD76FD25E2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IATec.Shared.EF.Persistence", "src/IATec.Shared.EF.Persistence.csproj", "{6C8DD48F-9B0C-4FFC-B2BD-FFD76FD25E2A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipeline", "Pipeline", "{80BF81F4-85B2-418C-BE58-765FCE4C5275}"
 	ProjectSection(SolutionItems) = preProject

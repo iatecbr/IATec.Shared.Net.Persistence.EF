@@ -3,7 +3,7 @@ using IATec.Shared.Domain.Contracts.Entities;
 using IATec.Shared.Domain.Contracts.Repositories.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace IATec.Shared.EF.Repository.Generic;
+namespace IATec.Shared.EF.Repository.Repositories.Generic;
 
 // ReSharper disable once SuggestBaseTypeForParameterInConstructor
 internal class GenericRepositoryQuery(DbContext dbContext) : IGenericRepositoryQuery
