@@ -22,7 +22,29 @@ steps:
         $packageVersion = $version.Project.PropertyGroup.Version
         Write-Host "##vso[task.setvariable variable=packageVersion]$packageVersion"
     displayName: 'Get project version'
-
+    
+  - task: NuGetAuthenticate@0
+    displayName: 'NuGet authenticate'
+    
+#  - task: RenameFiles@1
+#    displayName: 'Rename NuGet.Config.Prod To NuGet.Config'
+#    inputs:
+#      SourceFolder: '$(Build.SourcesDirectory)'
+#      Contents: 'NuGet.Config.Prod'
+#      TargetFolder: '$(Build.SourcesDirectory)'
+#      RenameTo: 'NuGet.Config'
+#
+#  - task: qetza.replacetokens.replacetokens-task.replacetokens@3
+#    displayName: 'Replace variables in NuGet.Config'
+#    inputs:
+#      targetFiles: '**/NuGet.Config'
+#      encoding: 'auto'
+#      writeBOM: true
+#      actionOnMissing: 'warn'
+#      keepToken: false
+#      tokenPrefix: '#{'
+#      tokenSuffix: '}#'
+    
   - script: dotnet build --configuration $(buildConfiguration)
     displayName: 'Dotnet build'
 
@@ -34,9 +56,6 @@ steps:
       packDestination: '$(Build.ArtifactStagingDirectory)'
       versioningScheme: byEnvVar
       versionEnvVar: packageVersion
-
-  - task: NuGetAuthenticate@0
-    displayName: 'NuGet authenticate'
 
   - task: NuGetCommand@2
     displayName: 'NuGet push'
