@@ -18,7 +18,7 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        $version = [xml](Get-Content  src/IATec.Shared.EF.Repository.csproj)
+        $version = [xml](Get-Content  src/IATec.Shared.EF.Persistence.csproj)
         $packageVersion = $version.Project.PropertyGroup.Version
         Write-Host "##vso[task.setvariable variable=packageVersion]$packageVersion"
     displayName: 'Get project version'
