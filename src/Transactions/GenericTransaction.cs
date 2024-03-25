@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IATec.Shared.EF.Repository.Transactions;
 
-public abstract class Transaction(DbContext dbContext) : ITransaction
+public abstract class GenericTransaction(DbContext dbContext) : ITransaction
 {
     public void BeginTransaction()
     {
