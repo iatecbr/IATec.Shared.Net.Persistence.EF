@@ -1,0 +1,46 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  name: IATec-Builds-Agents
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        $version = [xml](Get-Content  src/IATec.Shared.EF.Repository.csproj)
+        $packageVersion = $version.Project.PropertyGroup.Version
+        Write-Host "##vso[task.setvariable variable=packageVersion]$packageVersion"
+    displayName: 'Get project version'
+
+  - script: dotnet build --configuration $(buildConfiguration)
+    displayName: 'Dotnet build'
+
+  - task: NuGetCommand@2
+    inputs:
+      displayName: 'Pack nuGet package'
+      command: pack
+      packagesToPack: '**/IATec.Shared.EF.Repository.csproj'
+      packDestination: '$(Build.ArtifactStagingDirectory)'
+      versioningScheme: byEnvVar
+      versionEnvVar: packageVersion
+
+  - task: NuGetAuthenticate@0
+    displayName: 'NuGet authenticate'
+
+  - task: NuGetCommand@2
+    displayName: 'NuGet push'
+    inputs:
+      command: push
+      publishVstsFeed: 'IATec.Community'
+      allowPackageConflicts: true

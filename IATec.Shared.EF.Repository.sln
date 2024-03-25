@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IATec.Shared.EF.Repository", "src/IATec.Shared.EF.Repository.csproj", "{6C8DD48F-9B0C-4FFC-B2BD-FFD76FD25E2A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipeline", "Pipeline", "{80BF81F4-85B2-418C-BE58-765FCE4C5275}"
+	ProjectSection(SolutionItems) = preProject
+		azure-pipelines.yml = azure-pipelines.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{5603A7EB-1234-45DA-99FB-898292E6E25A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C8DD48F-9B0C-4FFC-B2BD-FFD76FD25E2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C8DD48F-9B0C-4FFC-B2BD-FFD76FD25E2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C8DD48F-9B0C-4FFC-B2BD-FFD76FD25E2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C8DD48F-9B0C-4FFC-B2BD-FFD76FD25E2A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6C8DD48F-9B0C-4FFC-B2BD-FFD76FD25E2A} = {5603A7EB-1234-45DA-99FB-898292E6E25A}
+	EndGlobalSection
+EndGlobal
