@@ -15,15 +15,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="Assets\icon.png" Pack="true" PackagePath="" />
+        <None Include="Assets\icon.png" Pack="true" PackagePath=""/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="IATec.Shared.Domain" Version="0.0.1-RC3" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Repositories\" />
+        <PackageReference Include="IATec.Shared.Domain" Version="0.0.1-RC3"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.3"/>
     </ItemGroup>
 </Project>

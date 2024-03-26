@@ -18,14 +18,14 @@ steps:
     inputs:
       targetType: 'inline'
       script: |
-        $version = [xml](Get-Content  src/IATec.Shared.EF.Persistence.csproj)
+        $version = [xml](Get-Content  src/IATec.Shared.Persistence.EF.csproj)
         $packageVersion = $version.Project.PropertyGroup.Version
         Write-Host "##vso[task.setvariable variable=packageVersion]$packageVersion"
     displayName: 'Get project version'
-    
+
   - task: NuGetAuthenticate@0
     displayName: 'NuGet authenticate'
-      
+
   - task: PowerShell@2
     displayName: 'Rename NuGet.Config.Prod To NuGet.Config'
     inputs:
@@ -43,7 +43,7 @@ steps:
       keepToken: false
       tokenPrefix: '#{'
       tokenSuffix: '}#'
-    
+
   - script: dotnet build --configuration $(buildConfiguration)
     displayName: 'Dotnet build'
 
@@ -51,7 +51,7 @@ steps:
     inputs:
       displayName: 'Pack nuGet package'
       command: pack
-      packagesToPack: '**/IATec.Shared.EF.Persistence.csproj'
+      packagesToPack: '**/IATec.Shared.Persistence.EF.csproj'
       packDestination: '$(Build.ArtifactStagingDirectory)'
       versioningScheme: byEnvVar
       versionEnvVar: packageVersion

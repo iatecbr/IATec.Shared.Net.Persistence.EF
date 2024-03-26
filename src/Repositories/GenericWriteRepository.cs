@@ -4,12 +4,12 @@ using IATec.Shared.Domain.Contracts.Repositories.Generic;
 using IATec.Shared.Domain.Identifies.Logging;
 using Microsoft.EntityFrameworkCore;
 
-namespace IATec.Shared.EF.Repository.Repositories.Generic;
+namespace IATec.Shared.EF.Repository.Repositories;
 
-public class WriteRepository<T>(
+public class GenericWriteRepository<T>(
     DbContext dbWriteContext,
     ILogDispatcher logDispatcher)
-    : ReadRepository<T>(dbWriteContext), IWriteRepository<T>
+    : GenericReadRepository<T>(dbWriteContext), IWriteRepository<T>
     where T : class, IEntity
 {
     private readonly DbSet<T> _dbSet = dbWriteContext.Set<T>();

@@ -2,9 +2,9 @@ using IATec.Shared.Domain.Contracts.Entities;
 using IATec.Shared.Domain.Contracts.Repositories.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace IATec.Shared.EF.Repository.Repositories.Generic;
+namespace IATec.Shared.EF.Repository.Repositories;
 
-public class ReadRepository<T>(DbContext dbReadContext) : IReadRepository<T>
+public class GenericReadRepository<T>(DbContext dbReadContext) : IReadRepository<T>
     where T : class, IEntity
 {
     private readonly DbSet<T> _dbSet = dbReadContext.Set<T>();
