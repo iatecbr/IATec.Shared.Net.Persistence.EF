@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IATec.Shared.EF.Repository.Repositories;
 
-public class GenericReadRepository<T>(DbContext dbReadContext) : IReadRepository<T>
+public abstract class GenericReadRepository<T>(DbContext dbReadContext) : IReadRepository<T>
     where T : class, IEntity
 {
     private readonly DbSet<T> _dbSet = dbReadContext.Set<T>();

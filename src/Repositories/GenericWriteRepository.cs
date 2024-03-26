@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IATec.Shared.EF.Repository.Repositories;
 
-public class GenericWriteRepository<T>(
+public abstract class GenericWriteRepository<T>(
     DbContext dbWriteContext,
     ILogDispatcher logDispatcher)
     : GenericReadRepository<T>(dbWriteContext), IWriteRepository<T>
