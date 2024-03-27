@@ -15,25 +15,23 @@ variables:
 
 steps:
   - task: PowerShell@2
+    displayName: 'Get project version'
     inputs:
       targetType: 'inline'
       script: |
         $version = [xml](Get-Content  src/IATec.Shared.Persistence.EF.csproj)
         $packageVersion = $version.Project.PropertyGroup.Version
         Write-Host "##vso[task.setvariable variable=packageVersion]$packageVersion"
-    displayName: 'Get project version'
-
+    
   - task: NuGetAuthenticate@0
     displayName: 'NuGet authenticate'
 
-  - task: PowerShell@2
-    displayName: 'Rename NuGet.Config.Prod To NuGet.Config'
+  - task: CmdLine@2
+    displayName: 'Rename NuGet.Config.Pipeline To NuGet.Config'
     inputs:
-      targetType: 'inline'
-      script: |
-        Rename-Item -Path "$(Build.SourcesDirectory)\NuGet.Config.Prod" -NewName "NuGet.Config"
+      script: 'rename $(Build.SourcesDirectory)\NuGet.Config.Pipeline NuGet.Config'
 
-  - task: replacetokens@6
+  - task: replacetokens@6`
     displayName: 'Replace variables in NuGet.Config'
     inputs:
       targetFiles: '**/NuGet.Config'
