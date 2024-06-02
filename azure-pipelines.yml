@@ -31,7 +31,7 @@ steps:
     inputs:
       script: 'rename $(Build.SourcesDirectory)\NuGet.Config.Pipeline NuGet.Config'
 
-  - task: replacetokens@6`
+  - task: replacetokens@6
     displayName: 'Replace variables in NuGet.Config'
     inputs:
       targetFiles: '**/NuGet.Config'
