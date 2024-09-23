@@ -11,9 +11,28 @@ pool:
   name: IATec-Builds-Agents
 
 variables:
-  buildConfiguration: 'Release'
+  - group: nuget-credentials
+  - name: buildConfiguration
+    value: 'Release'
 
 steps:
+  - task: replacetokens@6
+    displayName: 'Replace variables in setup-nuget.sh'
+    inputs:
+      targetFiles: 'setup-nuget.sh'
+      encoding: 'auto'
+      writeBOM: true
+      actionOnMissing: 'warn'
+      keepToken: false
+      tokenPrefix: '#{'
+      tokenSuffix: '}#'
+
+  - task: CmdLine@2
+    displayName: 'Run setup-nuget.sh with Git Bash'
+    inputs:
+      script: |
+        "C:\Program Files\Git\bin\bash.exe" -c "chmod +x ./setup-nuget.sh && ./setup-nuget.sh"
+
   - task: PowerShell@2
     displayName: 'Get project version'
     inputs:
@@ -22,7 +41,7 @@ steps:
         $version = [xml](Get-Content  src/IATec.Shared.Persistence.EF.csproj)
         $packageVersion = $version.Project.PropertyGroup.Version
         Write-Host "##vso[task.setvariable variable=packageVersion]$packageVersion"
-    
+
   - task: NuGetAuthenticate@0
     displayName: 'NuGet authenticate'
 
