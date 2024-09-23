@@ -45,22 +45,6 @@ steps:
   - task: NuGetAuthenticate@0
     displayName: 'NuGet authenticate'
 
-  - task: CmdLine@2
-    displayName: 'Rename NuGet.Config.Pipeline To NuGet.Config'
-    inputs:
-      script: 'rename $(Build.SourcesDirectory)\NuGet.Config.Pipeline NuGet.Config'
-
-  - task: replacetokens@6
-    displayName: 'Replace variables in NuGet.Config'
-    inputs:
-      targetFiles: '**/NuGet.Config'
-      encoding: 'auto'
-      writeBOM: true
-      actionOnMissing: 'warn'
-      keepToken: false
-      tokenPrefix: '#{'
-      tokenSuffix: '}#'
-
   - script: dotnet build --configuration $(buildConfiguration)
     displayName: 'Dotnet build'
 
