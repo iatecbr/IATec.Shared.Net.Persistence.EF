@@ -5,8 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IATec.Shared.EF.Repository.Repositories;
 
-// ReSharper disable once SuggestBaseTypeForParameterInConstructor
-public abstract class GenericRepositoryQuery(DbContext dbContext) : IGenericRepositoryQuery
+public class GenericRepositoryQuery(DbContext dbContext) : IGenericRepositoryQuery
 {
     public IQueryable<T> Query<T>(params Expression<Func<T, object>>[] includeProperties) where T : class, IEntity
     {
