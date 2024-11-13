@@ -10,7 +10,7 @@
         <Description>Project developed to help IATec teams to develop their projects faster.</Description>
         <Copyright>@IATec</Copyright>
         <RootNamespace>IATec.Shared.EF.Repository</RootNamespace>
-        <Version>0.4.0</Version>
+        <Version>0.4.1</Version>
         <PackageIconUrl>https://assets-services-dev.sdasystems.org/images/icons/standard.library.icon.png</PackageIconUrl>
         <PackageIcon>icon.png</PackageIcon>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
