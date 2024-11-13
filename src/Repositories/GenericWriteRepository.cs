@@ -12,12 +12,12 @@ public abstract class GenericWriteRepository<T>(
     : GenericReadRepository<T>(dbWriteContext), IWriteRepository<T>
     where T : class, IEntity
 {
-    private readonly DbSet<T> _dbSet = dbWriteContext.Set<T>();
-    private readonly DbContext _dbContext = dbWriteContext;
+    protected new readonly DbSet<T> DbSet = dbWriteContext.Set<T>();
+    protected readonly DbContext DbContext = dbWriteContext;
 
     protected async Task SaveLogAsync(dynamic entity, LogActionType action)
     {
-        await _dbContext.SaveChangesAsync();
+        await DbContext.SaveChangesAsync();
 
         if (entity is not IEntity) return;
 
@@ -40,48 +40,48 @@ public abstract class GenericWriteRepository<T>(
 
     public async Task AddAsync(T entity)
     {
-        await _dbSet.AddAsync(entity);
+        await DbSet.AddAsync(entity);
 
         await SaveLogAsync(entity, LogActionType.Added);
     }
 
     public async Task AddRangeAsync(IEnumerable<T> entities)
     {
-        await _dbSet.AddRangeAsync(entities);
+        await DbSet.AddRangeAsync(entities);
 
         foreach (var entity in entities) await SaveLogAsync(entity, LogActionType.Added);
     }
 
     public async Task RemoveAsync(T entity)
     {
-        _dbSet.Remove(entity);
+        DbSet.Remove(entity);
 
         await SaveLogAsync(entity, LogActionType.Deleted);
     }
 
     public async Task RemoveRangeAsync(IEnumerable<T> entities)
     {
-        _dbSet.RemoveRange(entities);
+        DbSet.RemoveRange(entities);
 
         foreach (var entity in entities) await SaveLogAsync(entity, LogActionType.Deleted);
     }
 
     public async Task UpdateAsync(T entity)
     {
-        _dbSet.Update(entity);
+        DbSet.Update(entity);
 
         await SaveLogAsync(entity, LogActionType.Modified);
     }
 
     public async Task UpdateRangeAsync(IEnumerable<T> entities)
     {
-        _dbSet.UpdateRange(entities);
+        DbSet.UpdateRange(entities);
 
         foreach (var entity in entities) await SaveLogAsync(entity, LogActionType.Modified);
     }
 
     public async Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        return await _dbContext.SaveChangesAsync(cancellationToken) > 0;
+        return await DbContext.SaveChangesAsync(cancellationToken) > 0;
     }
 }

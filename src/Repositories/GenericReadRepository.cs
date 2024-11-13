@@ -7,15 +7,15 @@ namespace IATec.Shared.EF.Repository.Repositories;
 public abstract class GenericReadRepository<T>(DbContext dbReadContext) : IReadRepository<T>
     where T : class, IEntity
 {
-    private readonly DbSet<T> _dbSet = dbReadContext.Set<T>();
+    protected readonly DbSet<T> DbSet = dbReadContext.Set<T>();
 
     public async Task<List<T>> GetAllAsync()
     {
-        return await _dbSet.ToListAsync();
+        return await DbSet.ToListAsync();
     }
 
     public async Task<T?> GetByIdAsync(int id)
     {
-        return await _dbSet.FindAsync(id);
+        return await DbSet.FindAsync(id);
     }
 }
