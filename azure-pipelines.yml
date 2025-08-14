@@ -1,11 +1,9 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 trigger:
   branches:
     include:
       - main
+
+pr: none
 
 pool:
   name: IATec-Builds-Agents
@@ -48,14 +46,15 @@ steps:
   - script: dotnet build --configuration $(buildConfiguration)
     displayName: 'Dotnet build'
 
-  - task: NuGetCommand@2
+  - task: DotNetCoreCLI@2
     inputs:
-      displayName: 'Pack nuGet package'
-      command: pack
-      packagesToPack: '**/IATec.Shared.Persistence.EF.csproj'
-      packDestination: '$(Build.ArtifactStagingDirectory)'
-      versioningScheme: byEnvVar
-      versionEnvVar: packageVersion
+      command: 'pack'
+      packagesToPack: '**/IATec.Shared.Persistence.EF.csproj' 
+      packDirectory: '$(Build.ArtifactStagingDirectory)'
+      nobuild: true 
+      versioningScheme: 'byEnvVar'
+      versionEnvVar: 'packageVersion'
+    displayName: 'Pack NuGet package with dotnet pack'
 
   - task: NuGetCommand@2
     displayName: 'NuGet push'
