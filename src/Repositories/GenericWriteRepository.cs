@@ -15,10 +15,8 @@ public abstract class GenericWriteRepository<T>(
     protected new readonly DbSet<T> DbSet = dbWriteContext.Set<T>();
     protected readonly DbContext DbContext = dbWriteContext;
 
-    protected async Task SaveLogAsync(dynamic entity, LogActionType action)
+    private async Task SaveLogAsync(dynamic entity, LogActionType action)
     {
-        await DbContext.SaveChangesAsync();
-
         if (entity is not IEntity) return;
 
         var source = entity.GetSourceType();
