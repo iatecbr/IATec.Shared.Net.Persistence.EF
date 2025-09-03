@@ -11,7 +11,7 @@
 		<Description>Project developed to help IATec teams to develop their projects faster.</Description>
 		<Copyright>@IATec Solutions</Copyright>
 		<RootNamespace>IATec.Shared.EF.Repository</RootNamespace>
-		<Version>1.0.1</Version>
+		<Version>1.0.2</Version>
 		<PackageIconUrl>https://assets-services-dev.sdasystems.org/images/icons/standard.library.icon.png</PackageIconUrl>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageProjectUrl>https://github.com/iatecbr/IATec.Shared.Net.Persistence.EF</PackageProjectUrl>
