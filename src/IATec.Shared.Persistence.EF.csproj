@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+		<TargetFramework>net10.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageId>IATec.Shared.EF.Repository</PackageId>
@@ -11,7 +11,7 @@
 		<Description>Project developed to help IATec teams to develop their projects faster.</Description>
 		<Copyright>@IATec Solutions</Copyright>
 		<RootNamespace>IATec.Shared.EF.Repository</RootNamespace>
-		<Version>1.0.2</Version>
+		<Version>1.1.0</Version>
 		<PackageIconUrl>https://assets-services-dev.sdasystems.org/images/icons/standard.library.icon.png</PackageIconUrl>
 		<PackageIcon>icon.png</PackageIcon>
 		<PackageProjectUrl>https://github.com/iatecbr/IATec.Shared.Net.Persistence.EF</PackageProjectUrl>
@@ -26,8 +26,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="IATec.Shared.Domain" Version="0.2.3" />
-		<PackageReference Include="IATec.Shared.Domain.EF" Version="0.2.1" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+		<PackageReference Include="IATec.Shared.Domain" Version="1.2.0" />
+		<PackageReference Include="IATec.Shared.Domain.EF" Version="1.2.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.1" />
 	</ItemGroup>
 </Project>
