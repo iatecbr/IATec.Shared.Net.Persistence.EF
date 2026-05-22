@@ -123,19 +123,6 @@ public async Task TransferAsync(int fromId, int toId, decimal amount)
 
 ---
 
-## Query Ordering
-
-```csharp
-var query = repository.Query<Product>(p => p.Category);
-
-var ordered = query.Ordering(
-    orderDirection: "desc",
-    orderBy: "Price",
-    p => p.CreatedAt);  // secondary descending ordering
-```
-
----
-
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for version history.

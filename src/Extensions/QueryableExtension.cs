@@ -10,14 +10,14 @@ public static class QueryableExtension
     private const string Asc = "asc";
 
     /// <summary>
-    /// Orders the query by the specified property with support for ascending or descending direction
-    /// and optional secondary ordering via includes.
+    /// Orders the query with primary sorting by <paramref name="includeProperties"/> (descending),
+    /// then applies <paramref name="orderBy"/> as a secondary sort in the requested direction.
     /// </summary>
     /// <typeparam name="T">The entity type.</typeparam>
     /// <param name="query">The source query.</param>
-    /// <param name="orderDirection">The ordering direction: "asc" for ascending or "desc" for descending.</param>
-    /// <param name="orderBy">The name of the primary property to order by.</param>
-    /// <param name="includeProperties">Optional secondary properties for descending ordering.</param>
+    /// <param name="orderDirection">The ordering direction for <paramref name="orderBy"/>: "asc" or "desc".</param>
+    /// <param name="orderBy">The name of the secondary property to order by.</param>
+    /// <param name="includeProperties">Primary properties for descending ordering.</param>
     /// <returns>An ordered queryable over <typeparamref name="T" />.</returns>
     public static IQueryable<T> Ordering<T>(this IQueryable<T> query, string orderDirection, string orderBy,
         params Expression<Func<T, object>>[] includeProperties)
