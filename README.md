@@ -29,7 +29,7 @@ This library provides generic repository patterns, transaction management, and q
 Add the package reference to your `.csproj`:
 
 ```xml
-<PackageReference Include="IATec.Shared.EF.Repository" Version="1.2.0" />
+<PackageReference Include="IATec.Shared.EF.Repository" Version="1.3.0" />
 ```
 
 ---
