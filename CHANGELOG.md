@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-09-22
+
+### Fixed
+
+- Fixed audit logging in `GenericWriteRepository.SaveChangesAsync` where `GetOwner()` returned the default `"0"` for entities in the `Added` state. Owner resolution now happens **after** persistence so database-generated identity keys are already assigned. Log content is still captured before saving (required for `Deleted` entities), while the owner is resolved from the tracked entity reference once the save completes.
+
 ## [1.2.0] - 2026-05-21
 
 ### Added
