@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [IATec.Shared.Persistence.EF.AuditOutbox 1.0.0] - Unreleased
+
+### Changed
+
+- `AuditOutboxOptions.PollInterval` default changed from `00:00:05` to `00:00:10` (10 seconds).
+
+### Fixed
+
+- Entries stuck in `Processing` after a worker/host crash or restart are no longer orphaned. A new nullable `ProcessingSince` column records when an entry was claimed; the worker now also selects `Processing` entries whose claim is older than the configurable `ProcessingTimeout` and re-delivers them. Entries claimed more recently are assumed to be in flight on another active replica and are left untouched (no double-send).
+
+### Added
+
+- `AuditOutboxOptions.ProcessingTimeout` (`TimeSpan`, default `00:05:00`): maximum time an entry may remain `Processing` before it is considered abandoned and rescued by a later poll cycle.
+- `AuditLogEntry.ProcessingSince` (`DateTime?`): UTC timestamp stamped when the worker claims an entry; cleared when a delivery fails (the entry returns to `Failed`).
+
+## [2.0.0] - Unreleased
+
+### Changed
+
+- **BREAKING:** `GenericWriteRepository<T>` no longer takes an `ILogDispatcher` in its constructor. Its signature is now `GenericWriteRepository<T>(DbContext dbWriteContext)`. Derived repositories must drop the `ILogDispatcher` parameter from their base call.
+- `GenericWriteRepository<T>.SaveChangesAsync` now only persists changes; it no longer captures entities from the change tracker nor dispatches audit logs.
+- `GenericTransaction` no longer coordinates audit-log buffering/dispatch on commit/rollback; it now only wraps `BeginTransaction`/`CommitTransaction`/`RollbackTransaction`.
+
+### Removed
+
+- **BREAKING:** Removed the automatic `ILogDispatcher`-based audit dispatch from the core. Auditing is now provided exclusively by the optional `IATec.Shared.Persistence.EF.AuditOutbox` package, whose save-changes interceptor writes audit entries within the same transaction as the business operation.
+- Removed internal `AuditLog` record and `AuditLogBuffer` class (no longer used).
+
 ## [1.3.0] - 2026-09-22
 
 ### Fixed

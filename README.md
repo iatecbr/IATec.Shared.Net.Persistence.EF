@@ -10,7 +10,7 @@ This library provides generic repository patterns, transaction management, and q
 
 - **Generic Repositories**
   - `GenericReadRepository<T>` - Basic read operations (`GetAllAsync`, `GetByIdAsync`)
-  - `GenericWriteRepository<T>` - Write operations with automatic audit logging (`AddAsync`, `UpdateAsync`, `RemoveAsync`, `AddRangeAsync`, `UpdateRangeAsync`, `RemoveRangeAsync`)
+  - `GenericWriteRepository<T>` - Write operations (`AddAsync`, `UpdateAsync`, `RemoveAsync`, `AddRangeAsync`, `UpdateRangeAsync`, `RemoveRangeAsync`)
   - `GenericRepositoryQuery` - Flexible query construction with eager-loading support (`Include`)
 
 - **Transaction Management**
@@ -19,8 +19,8 @@ This library provides generic repository patterns, transaction management, and q
 - **Query Extensions**
   - `QueryableExtension.Ordering<T>` - Dynamic ordering by property name with support for ascending/descending and secondary ordering
 
-- **Audit Logging**
-  - Automatic dispatch of `ILogDispatcher` events on entity changes (Add, Update, Remove)
+- **Audit Logging** (optional)
+  - Auditing is provided by the separate `IATec.Shared.Persistence.EF.AuditOutbox` package. When enabled via `AddAuditOutboxLog()`, a save-changes interceptor captures entity changes (Add, Update, Remove) and persists audit entries within the same transaction as the business operation. The core repositories themselves are audit-agnostic.
 
 ---
 
@@ -65,10 +65,9 @@ builder.Services.AddScoped<IProductTransaction, ProductTransaction>();
 
 ```csharp
 using IATec.Shared.EF.Repository.Repositories;
-using IATec.Shared.Domain.Contracts.Dispatcher;
 
-public class ProductRepository(ApplicationDbContext context, ILogDispatcher logDispatcher)
-    : GenericWriteRepository<Product>(context, logDispatcher), IProductRepository
+public class ProductRepository(ApplicationDbContext context)
+    : GenericWriteRepository<Product>(context), IProductRepository
 {
     // Add custom query methods here
 }
