@@ -1,4 +1,4 @@
-﻿using IATec.Shared.Domain.Contracts.Transactions;
+using IATec.Shared.Domain.Contracts.Transactions;
 using Microsoft.EntityFrameworkCore;
 
 namespace IATec.Shared.EF.Repository.Transactions;
@@ -7,8 +7,11 @@ namespace IATec.Shared.EF.Repository.Transactions;
 /// Provides a generic abstraction for managing database transactions using Entity Framework Core.
 /// </summary>
 /// <remarks>
-/// This class wraps the underlying <see cref="DbContext.Database"/> transaction APIs
-/// and should be used within a Unit of Work pattern to ensure atomic operations.
+/// This class wraps the underlying <see cref="DbContext.Database"/> transaction APIs and should be
+/// used within a Unit of Work pattern to ensure atomic operations. Auditing is no longer coordinated
+/// here: when the audit outbox package is enabled, its save-changes interceptor writes the audit
+/// entries within the same ambient transaction opened by <see cref="BeginTransaction"/>, so a commit
+/// persists both the business changes and their audit entries and a rollback discards both.
 /// </remarks>
 public abstract class GenericTransaction(DbContext dbContext) : ITransaction
 {
